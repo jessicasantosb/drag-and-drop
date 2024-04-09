@@ -1,7 +1,7 @@
 const draggables = document.querySelectorAll('.draggable');
 const form = document.querySelector('[data-form="form"]');
 const input = document.querySelector('[data-form="input"]');
-const containers = document.querySelector('[data-element="containers"]');
+const containers = document.querySelectorAll('.container');
 const containerNewTask = document.querySelector('[data-container="new"]');
 
 let list = [
@@ -41,10 +41,11 @@ const loadTasks = () => {
   });
 };
 
-const handleDraggingElement = (container) => {
+containers.forEach((container) => {
   container.addEventListener('dragover', (event) => {
     event.preventDefault();
     const afterElement = getDragAfterElement(container, event.clientY);
+    console.log(event);
     const draggable = document.querySelector('.dragging');
     if (afterElement == null) {
       container.appendChild(draggable);
@@ -52,14 +53,7 @@ const handleDraggingElement = (container) => {
       container.insertBefore(draggable, afterElement);
     }
   });
-};
-
-const handleContainerClick = ({ target }) => {
-  const isContainer = target.dataset.container;
-
-  if (!isContainer) return null;
-  if (isContainer) return handleDraggingElement(target);
-};
+});
 
 const getDragAfterElement = (container, y) => {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
@@ -82,7 +76,6 @@ const handleSubmit = (event) => {
   event.preventDefault();
 };
 
-containers.addEventListener('click', handleContainerClick);
 input.addEventListener('change', handlenewTasks);
 form.addEventListener('submit', handleSubmit);
 

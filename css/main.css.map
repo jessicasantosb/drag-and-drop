@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"main.css"}
+{"version":3,"sources":["../sass/layout/_page.scss","main.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,gBAAA;ACCJ;;ADEA;EACI,YAAA;ACCJ","file":"main.css","sourcesContent":[".container {\n    padding: 1rem;\n    min-height: 40px;\n}\n\n.dragging {\n    opacity: 0.4;\n}\n",".container {\n  padding: 1rem;\n  min-height: 40px;\n}\n\n.dragging {\n  opacity: 0.4;\n}"]}
