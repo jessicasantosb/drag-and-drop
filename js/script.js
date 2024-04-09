@@ -1,17 +1,47 @@
 const draggables = document.querySelectorAll('.draggable');
-const containers = document.querySelectorAll('.container');
+const form = document.querySelector('[data-form="form"]');
+const input = document.querySelector('[data-form="input"]');
+const containers = document.querySelector('[data-element="containers"]');
+const containerNewTask = document.querySelector('[data-container="new"]');
 
-draggables.forEach((draggable) => {
-  draggable.addEventListener('dragstart', () => {
-    draggable.classList.add('dragging');
+let list = [
+  'build a personal project',
+  'contribute to an open-source project',
+  'read a tech blog or article',
+  'solve a challenging algorithm problem',
+  'refactor legacy code',
+];
+
+let newTasks = [];
+
+const handlenewTasks = ({ target }) => {
+  newTasks.push(target.value);
+};
+
+const createTaskElement = (task) => {
+  const element = document.createElement('p');
+  element.className = 'draggable';
+  element.setAttribute('draggable', true);
+  element.textContent = task;
+  return element;
+};
+
+const loadTasks = () => {
+  list.forEach((task) => {
+    const taskElement = createTaskElement(task);
+    containerNewTask.appendChild(taskElement);
+
+    taskElement.addEventListener('dragstart', () => {
+      taskElement.classList.add('dragging');
+    });
+
+    taskElement.addEventListener('dragend', () => {
+      taskElement.classList.remove('dragging');
+    });
   });
+};
 
-  draggable.addEventListener('dragend', () => {
-    draggable.classList.remove('dragging');
-  });
-});
-
-containers.forEach((container) => {
+const handleDraggingElement = (container) => {
   container.addEventListener('dragover', (event) => {
     event.preventDefault();
     const afterElement = getDragAfterElement(container, event.clientY);
@@ -22,15 +52,22 @@ containers.forEach((container) => {
       container.insertBefore(draggable, afterElement);
     }
   });
-});
+};
+
+const handleContainerClick = ({ target }) => {
+  const isContainer = target.dataset.container;
+
+  if (!isContainer) return null;
+  if (isContainer) return handleDraggingElement(target);
+};
 
 const getDragAfterElement = (container, y) => {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
 
   return draggableElements.reduce(
     (closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
+      const container = child.getBoundingClientRect();
+      const offset = y - container.top - container.height / 2;
       if (offset < 0 && offset > closest.offset) {
         return { offset: offset, element: child };
       } else {
@@ -39,4 +76,16 @@ const getDragAfterElement = (container, y) => {
     },
     { offset: Number.NEGATIVE_INFINITY }
   ).element;
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+};
+
+containers.addEventListener('click', handleContainerClick);
+input.addEventListener('change', handlenewTasks);
+form.addEventListener('submit', handleSubmit);
+
+window.onload = () => {
+  loadTasks();
 };

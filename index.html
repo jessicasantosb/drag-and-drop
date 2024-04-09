@@ -3,28 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./sass/main.css" />
+    <link rel="stylesheet" href="./css/main.css" />
     <script defer src="./js/script.js"></script>
     <title>Drag and Drop</title>
   </head>
 
   <body>
-    <main>
-      <h1>To Do List</h1>
-      <form data-form="form">
-        <input type="text" data-form="input">
-        <button>Create</button>
+    <main class="main">
+      <h1 class="main__title">To Do List</h1>
+      <form class="main__form" data-form="form">
+        <input class="input" type="text" data-form="input" />
+        <button class="button">Create</button>
       </form>
-      <h3>Studies</h3>
-      <div class="container">
-        <p class="draggable" draggable="true">1</p>
-        <p class="draggable" draggable="true">2</p>
-      </div>
 
-      <h3>Work</h3>
-      <div class="container">
-        <p class="draggable" draggable="true">3</p>
-        <p class="draggable" draggable="true">4</p>
+      <div data-element="containers">
+        <h3 class="main__subtitle">New tasks</h3>
+        <div class="container" data-container="new"></div>
+
+        <h3 class="main__subtitle">Studies</h3>
+        <div class="container" data-container="studies"></div>
+
+        <h3 class="main__subtitle">Work</h3>
+        <div class="container" data-container="work"></div>
       </div>
     </main>
   </body>
