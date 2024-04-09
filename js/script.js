@@ -12,11 +12,7 @@ let list = [
   'refactor legacy code',
 ];
 
-let newTasks = [];
-
-const handlenewTasks = ({ target }) => {
-  newTasks.push(target.value);
-};
+let allTasks = JSON.parse(localStorage.getItem('tasks')) || list;
 
 const createTaskElement = (task) => {
   const element = document.createElement('p');
@@ -26,8 +22,8 @@ const createTaskElement = (task) => {
   return element;
 };
 
-const loadTasks = () => {
-  list.forEach((task) => {
+const addTasks = () => {
+  allTasks.forEach((task) => {
     const taskElement = createTaskElement(task);
     containerNewTask.appendChild(taskElement);
 
@@ -45,7 +41,6 @@ containers.forEach((container) => {
   container.addEventListener('dragover', (event) => {
     event.preventDefault();
     const afterElement = getDragAfterElement(container, event.clientY);
-    console.log(event);
     const draggable = document.querySelector('.dragging');
     if (afterElement == null) {
       container.appendChild(draggable);
@@ -74,11 +69,15 @@ const getDragAfterElement = (container, y) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
+
+  const inputValue = input.value;
+  allTasks.push(inputValue);
+  localStorage.setItem('tasks', JSON.stringify(allTasks));
+  addTasks();
 };
 
-input.addEventListener('change', handlenewTasks);
 form.addEventListener('submit', handleSubmit);
 
 window.onload = () => {
-  loadTasks();
+  addTasks();
 };
