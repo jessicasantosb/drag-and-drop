@@ -3,8 +3,9 @@ const form = document.querySelector('[data-form="form"]');
 const input = document.querySelector('[data-form="input"]');
 const containers = document.querySelectorAll('.container');
 const containerNewTask = document.querySelector('[data-container="new"]');
+const containerCompleted = document.querySelector('[data-container="completed"]');
 const dateContainer = document.querySelector('[data-element="main__date"]');
-const resetElement = document.querySelector('[data-container="reset"]')
+const resetElement = document.querySelector('[data-container="reset"]');
 
 let list = [
   'build a personal project',
@@ -42,7 +43,6 @@ const createDeleteIcon = (id) => {
   icon.className = 'fa-solid fa-trash';
   icon.addEventListener('click', () => {
     const updatedItems = allTasks.filter((task, index) => index !== id);
-    console.log(updatedItems);
     updateLocalStorage(updatedItems);
     const element = document.querySelector(`[data-trash="${id}"]`);
     element.remove();
@@ -109,6 +109,10 @@ containers.forEach((container) => {
       container.insertBefore(draggable, afterElement);
     }
   });
+
+  if (container.dataset = 'completed') {
+    containerCompleted.style.opacity = '0.4';
+  }
 });
 
 const getDragAfterElement = (container, y) => {
@@ -135,15 +139,15 @@ const handleSubmit = (event) => {
 };
 
 const resetList = () => {
-  const answer = window.confirm("Are you sure you want to reset your to-do list?")
+  const answer = window.confirm('Are you sure you want to reset your to-do list?');
   if (answer) {
-    allTasks = []
-    updateLocalStorage(allTasks)
-    loadTasks()
+    allTasks = [];
+    updateLocalStorage(allTasks);
+    loadTasks();
   }
-}
+};
 
-resetElement.addEventListener("click", resetList)
+resetElement.addEventListener('click', resetList);
 form.addEventListener('submit', handleSubmit);
 
 window.onload = () => {
