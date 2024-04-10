@@ -14,18 +14,49 @@ let list = [
 
 let allTasks = JSON.parse(localStorage.getItem('tasks')) || list;
 
-const createTaskElement = (task) => {
+const updateLocalStorage = (newArray) => {
+  localStorage.setItem('tasks', JSON.stringify(newArray));
+};
+
+const addTask = () => {
+  const inputValue = input.value;
+  allTasks.push(inputValue);
+  input.value = '';
+  updateLocalStorage(allTasks);
+  loadTasks();
+};
+
+const createTaskElement = (task, id) => {
   const element = document.createElement('p');
   element.className = 'draggable';
-  element.setAttribute('draggable', true);
+  element.dataset.draggable = true;
+  element.dataset.trash = id;
   element.textContent = task;
   return element;
 };
 
-const addTasks = () => {
-  allTasks.forEach((task) => {
-    const taskElement = createTaskElement(task);
+const createDeleteIcon = (id) => {
+  const icon = document.createElement('i');
+  icon.className = 'fa-solid fa-trash';
+  icon.addEventListener('click', () => {
+    const updatedItems = allTasks.filter((task, index) => index !== id);
+    console.log(updatedItems);
+    updateLocalStorage(updatedItems);
+    const element = document.querySelector(`[data-trash="${id}"]`);
+    element.remove();
+  });
+  return icon;
+};
+
+const loadTasks = () => {
+  containerNewTask.innerHTML = '';
+
+  allTasks.forEach((task, index) => {
+    const taskElement = createTaskElement(task, index);
+    const deleteIcon = createDeleteIcon(index);
+
     containerNewTask.appendChild(taskElement);
+    taskElement.appendChild(deleteIcon);
 
     taskElement.addEventListener('dragstart', () => {
       taskElement.classList.add('dragging');
@@ -70,14 +101,11 @@ const getDragAfterElement = (container, y) => {
 const handleSubmit = (event) => {
   event.preventDefault();
 
-  const inputValue = input.value;
-  allTasks.push(inputValue);
-  localStorage.setItem('tasks', JSON.stringify(allTasks));
-  addTasks();
+  addTask();
 };
 
 form.addEventListener('submit', handleSubmit);
 
 window.onload = () => {
-  addTasks();
+  loadTasks();
 };

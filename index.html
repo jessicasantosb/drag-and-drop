@@ -3,8 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- styles -->
     <link rel="stylesheet" href="./css/main.css" />
+
+    <!-- scripts -->
     <script defer src="./js/script.js"></script>
+
     <title>Drag and Drop</title>
   </head>
 
@@ -12,12 +26,12 @@
     <main class="main">
       <h1 class="main__title">To Do List</h1>
       <form class="main__form" data-form="form">
-        <input class="input" type="text" data-form="input" />
+        <input class="input" type="text" data-form="input" name="task"/>
         <button class="button">Create</button>
       </form>
 
       <div data-element="containers">
-        <h3 class="main__subtitle">New tasks</h3>
+        <h3 class="main__subtitle">New tasks </h3>
         <div class="container" data-container="new"></div>
 
         <h3 class="main__subtitle">Studies</h3>
