@@ -3,6 +3,7 @@ const form = document.querySelector('[data-form="form"]');
 const input = document.querySelector('[data-form="input"]');
 const containers = document.querySelectorAll('.container');
 const containerNewTask = document.querySelector('[data-container="new"]');
+const dateContainer = document.querySelector('[data-element="date"]');
 
 let list = [
   'build a personal project',
@@ -46,6 +47,34 @@ const createDeleteIcon = (id) => {
     element.remove();
   });
   return icon;
+};
+
+const loadDate = () => {
+  const dateElement = document.createElement('div');
+  const dayElement = document.createElement('div');
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const dayOfWeek = date.getDay();
+  const dayName = ['monday', 'tuesday', 'wendenday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+  const dateHtml = `
+    <p>${year}</p>
+    <p>${month}</p>
+    <p>${day}</p>    
+ `;
+
+  const dayHtml = `
+  <p>${dayName[dayOfWeek]}</p>
+  `;
+
+  dateElement.className = 'date';
+  dayElement.className = "day"
+  dateElement.innerHTML = dateHtml;
+  dayElement.innerHTML = dayHtml;
+  dateContainer.append(dateElement, dayElement);
 };
 
 const loadTasks = () => {
@@ -107,5 +136,6 @@ const handleSubmit = (event) => {
 form.addEventListener('submit', handleSubmit);
 
 window.onload = () => {
+  loadDate();
   loadTasks();
 };
