@@ -25,21 +25,22 @@
   <body>
     <main class="main">
       <h1 class="main__title">To Do List</h1>
-      <div data-element="date"></div>
+      <div data-element="main__date"></div>
       <form class="main__form" data-form="form">
         <input class="input" type="text" data-form="input" name="task"/>
         <button class="button">Create</button>
       </form>
 
       <div data-element="containers">
-        <h3 class="main__subtitle">New tasks </h3>
         <div class="container" data-container="new"></div>
 
-        <h3 class="main__subtitle">Studies</h3>
+        <h3 class="main__subtitle">Do later</h3>
         <div class="container" data-container="studies"></div>
 
-        <h3 class="main__subtitle">Work</h3>
+        <h3 class="main__subtitle">Completed</h3>
         <div class="container" data-container="work"></div>
+
+        <button data-container="reset">reset progress</button>
       </div>
     </main>
   </body>

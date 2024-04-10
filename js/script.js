@@ -3,7 +3,8 @@ const form = document.querySelector('[data-form="form"]');
 const input = document.querySelector('[data-form="input"]');
 const containers = document.querySelectorAll('.container');
 const containerNewTask = document.querySelector('[data-container="new"]');
-const dateContainer = document.querySelector('[data-element="date"]');
+const dateContainer = document.querySelector('[data-element="main__date"]');
+const resetElement = document.querySelector('[data-container="reset"]')
 
 let list = [
   'build a personal project',
@@ -70,8 +71,8 @@ const loadDate = () => {
   <p>${dayName[dayOfWeek]}</p>
   `;
 
-  dateElement.className = 'date';
-  dayElement.className = "day"
+  dateElement.className = 'day day-date';
+  dayElement.className = 'day day-name';
   dateElement.innerHTML = dateHtml;
   dayElement.innerHTML = dayHtml;
   dateContainer.append(dateElement, dayElement);
@@ -133,6 +134,16 @@ const handleSubmit = (event) => {
   addTask();
 };
 
+const resetList = () => {
+  const answer = window.confirm("Are you sure you want to reset your to-do list?")
+  if (answer) {
+    allTasks = []
+    updateLocalStorage(allTasks)
+    loadTasks()
+  }
+}
+
+resetElement.addEventListener("click", resetList)
 form.addEventListener('submit', handleSubmit);
 
 window.onload = () => {
