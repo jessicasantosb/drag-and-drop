@@ -32,7 +32,7 @@ const addTask = () => {
 const createTaskElement = (task, id) => {
   const element = document.createElement('p');
   element.className = 'draggable';
-  element.dataset.draggable = true;
+  element.setAttribute('draggable', true);
   element.dataset.trash = id;
   element.textContent = task;
   return element;
