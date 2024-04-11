@@ -1,0 +1,22 @@
+@use "../base/variables"as *;
+
+.button {
+    height: 40px;
+    padding-inline: 10px;
+    text-transform: lowercase;
+    background-color: $secondary;
+    color: $bg;
+    font-weight: 700;
+    user-select: none;
+    cursor: pointer;
+    transition: all 400ms ease-in-out;
+    &:hover {
+        opacity: 0.8;
+        box-shadow: none;
+    }
+}
+
+.reset {
+    float: right;
+    margin-bottom: 2rem;
+}

@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet" />
+
     <!-- icons -->
     <link
       rel="stylesheet"
@@ -19,28 +24,34 @@
     <!-- scripts -->
     <script defer src="./js/script.js"></script>
 
-    <title>Drag and Drop</title>
+    <title>To Do List</title>
   </head>
 
   <body>
     <main class="main">
       <h1 class="main__title">To Do List</h1>
-      <div data-element="main__date"></div>
+      <div class="main__date" data-element="main__date"></div>
       <form class="main__form" data-form="form">
-        <input class="input" type="text" data-form="input" name="task"/>
-        <button class="button">Create</button>
+        <input class="input" type="text" data-form="input" name="task" placeholder="type your task" />
+        <button class="button create">Create</button>
       </form>
 
       <div data-element="containers">
-        <div class="container" data-container="new"></div>
+        <div class="containers__container" data-container="new"></div>
 
-        <h3 class="main__subtitle">Do later</h3>
-        <div class="container" data-container="doLater"></div>
+        <h3 class="containers__subtitle">
+          <i class="fa-regular fa-clock"></i>
+          Do later
+        </h3>
+        <div class="containers__container" data-container="doLater"></div>
 
-        <h3 class="main__subtitle">Completed</h3>
-        <div class="container" data-container="completed"></div>
+        <h3 class="containers__subtitle">
+          <i class="fa-solid fa-check"></i>
+          Completed
+        </h3>
+        <div class="containers__container" data-container="completed"></div>
 
-        <button data-container="reset">reset progress</button>
+        <button class="button reset" data-container="reset">reset progress</button>
       </div>
     </main>
   </body>

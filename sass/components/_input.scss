@@ -1,0 +1,17 @@
+@use "../base/variables"as *;
+
+.input {
+    height: 40px;
+    padding: 5px;
+    border-bottom: 2px solid $secondary;
+    background-color: $primary;
+    opacity: 0.5;
+    &::placeholder {
+        color: $secondary;
+    }
+    &:focus {
+        outline: none;
+        border: 2px solid $secondary;
+        background-color: $bg;
+    }
+}

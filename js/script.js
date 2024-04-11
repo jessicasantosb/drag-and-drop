@@ -1,7 +1,7 @@
 const draggables = document.querySelectorAll('.draggable');
 const form = document.querySelector('[data-form="form"]');
 const input = document.querySelector('[data-form="input"]');
-const containers = document.querySelectorAll('.container');
+const containers = document.querySelectorAll('.containers__container');
 const containerNewTask = document.querySelector('[data-container="new"]');
 const containerCompleted = document.querySelector('[data-container="completed"]');
 const dateContainer = document.querySelector('[data-element="main__date"]');
@@ -59,22 +59,19 @@ const loadDate = () => {
   const month = date.getMonth();
   const day = date.getDate();
   const dayOfWeek = date.getDay();
-  const dayName = ['monday', 'tuesday', 'wendenday', 'thursday', 'friday', 'saturday', 'sunday'];
+  const dayName = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  const monthName = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
   const dateHtml = `
     <p>${year}</p>
-    <p>${month}</p>
+    <p>${monthName[month]}</p>
     <p>${day}</p>    
  `;
 
-  const dayHtml = `
-  <p>${dayName[dayOfWeek]}</p>
-  `;
-
-  dateElement.className = 'day day-date';
-  dayElement.className = 'day day-name';
+  dateElement.className = 'date-full';
+  dayElement.className = 'date-dayOfWeek';
   dateElement.innerHTML = dateHtml;
-  dayElement.innerHTML = dayHtml;
+  dayElement.textContent = dayName[dayOfWeek];
   dateContainer.append(dateElement, dayElement);
 };
 
@@ -110,7 +107,7 @@ containers.forEach((container) => {
     }
   });
 
-  if (container.dataset = 'completed') {
+  if ((container.dataset = 'completed')) {
     containerCompleted.style.opacity = '0.4';
   }
 });

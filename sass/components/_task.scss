@@ -1,0 +1,23 @@
+@use "../base/variables"as *;
+
+.draggable {
+    width: 100%;
+    min-height: 40px;
+    padding: 10px;
+    margin-block: 0.75rem;
+    box-shadow: $primary 2px 2px;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+
+    & i {
+        color: rgb(241, 61, 61);
+        cursor: pointer;
+    }
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+}

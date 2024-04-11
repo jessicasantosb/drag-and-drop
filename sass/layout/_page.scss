@@ -1,8 +1,40 @@
-.container {
-    padding: 1rem;
-    min-height: 40px;
+@use "../base/variables"as *;
+
+.main {
+    min-height: 100dvh;
+    max-width: 1024px;
+    margin-inline: auto;
+    padding: 2rem;
+    user-select: none;
+
+    &__title {
+        text-align: center;
+        font-size: 3em;
+        font-weight: bolder;
+    }
+
+    &__date {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__form {
+        text-align: center;
+        margin-block: 2rem;
+    }
 }
 
-.dragging {
-    opacity: 0.4;
+.containers {
+    &__container {
+        margin-bottom: 1rem;
+        min-height: 3rem;
+    }
+
+    &__subtitle {
+        margin-top: 2rem;
+        font-size: 1.15em;
+    }
 }
