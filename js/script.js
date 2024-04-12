@@ -1,4 +1,3 @@
-const draggables = document.querySelectorAll('.draggable');
 const form = document.querySelector('[data-form="form"]');
 const input = document.querySelector('[data-form="input"]');
 const containers = document.querySelectorAll('.containers__container');
@@ -33,7 +32,7 @@ const createTaskElement = (task, id) => {
   const element = document.createElement('p');
   element.className = 'draggable';
   element.setAttribute('draggable', true);
-  element.dataset.trash = id;
+  element.dataset.task = id;
   element.textContent = task;
   return element;
 };
@@ -44,7 +43,7 @@ const createDeleteIcon = (id) => {
   icon.addEventListener('click', () => {
     const updatedItems = allTasks.filter((task, index) => index !== id);
     updateLocalStorage(updatedItems);
-    const element = document.querySelector(`[data-trash="${id}"]`);
+    const element = document.querySelector(`[data-task="${id}"]`);
     element.remove();
   });
   return icon;
@@ -88,7 +87,6 @@ const loadTasks = () => {
     taskElement.addEventListener('dragstart', () => {
       taskElement.classList.add('dragging');
     });
-
     taskElement.addEventListener('dragend', () => {
       taskElement.classList.remove('dragging');
     });
@@ -98,6 +96,7 @@ const loadTasks = () => {
 containers.forEach((container) => {
   container.addEventListener('dragover', (event) => {
     event.preventDefault();
+
     const afterElement = getDragAfterElement(container, event.clientY);
     const draggable = document.querySelector('.dragging');
     if (afterElement == null) {
@@ -105,6 +104,14 @@ containers.forEach((container) => {
     } else {
       container.insertBefore(draggable, afterElement);
     }
+
+    const tasks = container.querySelectorAll('p');
+    allTasks = [];
+    tasks.forEach((task) => {
+      const newTask = task.textContent;
+      allTasks.push(newTask);
+    });
+    updateLocalStorage(allTasks);
   });
 
   if ((container.dataset = 'completed')) {
@@ -147,7 +154,5 @@ const resetList = () => {
 resetElement.addEventListener('click', resetList);
 form.addEventListener('submit', handleSubmit);
 
-window.onload = () => {
-  loadDate();
-  loadTasks();
-};
+loadDate();
+loadTasks();
