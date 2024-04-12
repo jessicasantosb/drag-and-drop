@@ -2,7 +2,7 @@
 
 .date-full {
     display: grid;
-    grid-template-columns: 3em auto;
+    grid-template-columns: repeat(2, auto);
     grid-template-rows: 3.30em;
 
     & p:nth-child(1) {
